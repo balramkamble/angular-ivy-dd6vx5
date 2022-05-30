@@ -1,0 +1,126 @@
+<div class="p-2">
+  <br /><br />
+  <h2>Product Added in cart</h2>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button
+      class="btn btn-danger"
+      value="Apple"
+      (click)="productAdd($event)"
+      [disabled]="status"
+    >
+      Apple
+    </button>
+    <button
+      class="btn btn-danger"
+      value="OnePlus"
+      (click)="productAdd($event)"
+      [disabled]="status"
+    >
+      OnePlus
+    </button>
+    <button
+      class="btn btn-danger"
+      value="Motorola"
+      (click)="productAdd($event)"
+      [disabled]="status"
+    >
+      Motorola
+    </button>
+  </div>
+  <div *ngIf="result">
+    <p [hidden]="status">{{ result }} is added</p>
+    <p>
+      total product is <span class="badge bg-danger">{{ cnt }}</span>
+    </p>
+  </div>
+
+  <hr />
+  <br /><br /><br />
+  <h2>Refrence Variable</h2>
+  <form>
+    <div class="mb-3">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" class="form-control" #email />
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="getRefValue(email)">
+      Submit
+    </button>
+  </form>
+  <hr />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td>Email</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mail of listEmail; index as i">
+        <td>{{ mail }} {{ i + 1 }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br /><br /><br />
+  <h2>Two way data binding</h2>
+  <form>
+    <div class="mb-3">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        class="form-control"
+        [(ngModel)]="name"
+      />
+    </div>
+    <div class="alert alert-primary" *ngIf="name; else elseblock">
+      <p>{{ name }}</p>
+    </div>
+    <ng-template #elseblock>
+      <div class="alert alert-danger">
+        <p>No Enter any text</p>
+      </div>
+    </ng-template>
+  </form>
+
+  <br /><br /><br />
+  <hr />
+  <h2>Template driven form</h2>
+
+  <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+    <div class="mb-2">
+      <label for="" [style.background-color]="bgStyle">product ID</label>
+      <input type="text" name="pid" id="pid">
+    </div>
+
+    <div class="mb-2">
+      <label for="pname" [class.text-primary]="!status">prdouct name</label> 
+      <input type="text" name="pname" id="pname" #pname="ngModel" [(ngModel)]="pname">
+    </div>
+
+    <div class="mb-2">
+      <label for="price" [attr.aria-label]="priceLBL" [class]="allClass"
+        >prdouct price</label>
+        <input type="text" name="price" id="price" #price="ngModel" ngModel>
+    </div>
+    <button class="btn btn-primary" [style]="allStyle" [disabled]="!productForm.valid">
+      Submit
+    </button>
+  </form>
+  <div [hidden]="!productForm.form.valid">
+    <p>{{ productInformation }}</p>
+  </div>
+  <br /><br /><br />
+  <hr />
+  <div class="mb-2">
+    <label> Course List </label>
+    <select name="course" id="course" class="form-select">
+      <option *ngFor="let clist of course; index as  i" value="{{clist}}">{{i+1}} {{clist}}</option>
+      <option> {{course[2]}}</option>
+    </select>
+  </div>
+
+  <br /><br /><br />
+  <hr />
+
+</div>
